@@ -58,24 +58,21 @@ class MangoTree {
   produceMangoes(fruits) {
     const countFruits = (this.age-this.matureAge) + Math.ceil(Math.random() * (2+this.age-this.matureAge));
     for (let i = 0; i < countFruits; i++) {
-      const coin = Math.random();
-      if (coin > 0.3){
-        fruits.push("Good");
-      } else {
-        fruits.push("Bad");
-      }
+      const fruit = new Mango;
+      fruits.push(fruit);
     }
   }
   
   // Get some fruits
   harvest(fruits) {
-    for (let i in fruits) {
-      if (fruits[i] == "Good") {
+    for (let fruit of fruits) {
+      if (fruit.quality == "Good") {
         this.goodFruits++;
-      } else if (fruits[i] == "Bad") {
+      } else if (fruit.quality == "Bad") {
         this.badFruits++;
       }
     }
+    console.log(fruits);
     console.log(`[Year ${this.age} Report] Height = ${this.height.toFixed(1)} | Fruit harvested = ${this.fruits.length} (${this.goodFruits} good, ${this.badFruits} bad)`);
     this.goodFruits = 0;
     this.badFruits = 0;
@@ -86,7 +83,16 @@ class MangoTree {
 class Mango {
   // Produce a mango
   constructor() {
+    this.quality = this.makeFruit();
+  }
 
+  makeFruit(){
+    const coin = Math.random();
+    if (coin > 0.3){
+      return "Good";
+    } else {
+      return "Bad";
+    }
   }
 }
 
