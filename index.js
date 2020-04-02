@@ -321,9 +321,10 @@ class FruitTree {
   // Grow the tree
   grow () {
     //check Age
-    if(this.age < this._maxAge) this.age++
-    else if(this.age >= this._maxAge) {
+    this.age++;
+    if(this.age >= this._maxAge) {
       this.healthStatus = false;
+      this.age = this._maxAge;
     }
     if(this.age >= this._matureAge) this._mature = true;
     //check Height
