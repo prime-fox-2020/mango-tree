@@ -34,9 +34,6 @@ class AppleTree {
     return this._harvested
   }
 
-  // Get current states here
-
-  // Grow the tree
   grow () {
     
     this._age++
