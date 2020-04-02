@@ -8,12 +8,13 @@ class MangoTree {
   constructor () {
     this._age = 0
     this._height = 0
-    this._mature = Math.trunc(Math.random()*10)
+    this._mature = 3
     this._fruits = 0
     this._healthStatus = true
     this._harvestedGood = this.fruits - Math.trunc((Math.random() * this.fruits))
     this._harvestedBad = this.fruits - this.harvestedGood
-    this._harvested = `${this.fruits} (${this.harvestedGood} Good, ${this.harvestedBad} Bad)`  
+    this._harvested = `${this.fruits} (${this.harvestedGood} Good, ${this.harvestedBad} Bad)`
+    this._growScale = 10  
   }
 
   get age () {
@@ -28,6 +29,12 @@ class MangoTree {
   }
   set height (param) {
     this._height = param
+  }
+  get growScale () {
+    return this._growScale
+  }
+  set growScale (param) {
+    this._growScale = param
   }
   
   get fruits () {
@@ -71,7 +78,7 @@ class MangoTree {
   // Grow the tree
   grow () {
     if(this.age <= 14){
-      let randomGrow = (Math.trunc(Math.random()*10))*0.1
+      let randomGrow = (Math.trunc(Math.random()*this.growScale))*0.1
       this.height += randomGrow
       this.height = +this.height.toFixed(1)
     }
@@ -125,12 +132,13 @@ class AppleTree {
   constructor () {
     this._age = 0
     this._height = 0
-    this._mature = Math.trunc(Math.random()*10)
+    this._mature = 4
     this._fruits = 0
     this._healthStatus = true
     this._harvestedGood = this.fruits - Math.trunc((Math.random() * this.fruits))
     this._harvestedBad = this.fruits - this.harvestedGood
-    this._harvested = `${this.fruits} (${this.harvestedGood} Good, ${this.harvestedBad} Bad)`  
+    this._harvested = `${this.fruits} (${this.harvestedGood} Good, ${this.harvestedBad} Bad)` 
+    this._growScale = 4
   }
 
   get age () {
@@ -145,6 +153,13 @@ class AppleTree {
   }
   set height (param) {
     this._height = param
+  }
+
+  get growScale () {
+    return this._growScale
+  }
+  set growScale (param) {
+    this._growScale = param
   }
   
   get fruits () {
@@ -188,7 +203,7 @@ class AppleTree {
   // Grow the tree
   grow () {
     if(this.age <= 14){
-      let randomGrow = (Math.trunc(Math.random()*10))*0.1
+      let randomGrow = (Math.trunc(Math.random()*this.growScale))*0.1
       this.height += randomGrow
       this.height = +this.height.toFixed(1)
     }
