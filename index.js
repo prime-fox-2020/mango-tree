@@ -1,10 +1,8 @@
 "use strict"
 
-// Release 0
-
-class MangoTree {
-
-  // Initialize a new MangoTree
+// Release 2
+class FruitTree {
+  
   constructor (age=0, height=0, fruits=0, healthStatus=true, harvested=null) {
     this._age = age
     this._height = height
@@ -12,7 +10,6 @@ class MangoTree {
     this._healthStatus = healthStatus
     this._harvested = harvested
   }
-
   get age () {
     return this._age
   }
@@ -32,14 +29,36 @@ class MangoTree {
   get harvested () {
     return this._harvested
   }
+}
+class Fruit {
+  constructor () {
+    this.quality = this.quality()
+  }
+  quality(){
+    if (Math.random() > 0.4){
+      return 'good'
+    } else {
+      return 'bad'
+    }
+  }
+}
+
+// Release 0
+
+class MangoTree extends FruitTree {
+
+  // Initialize a new MangoTree
+  constructor () {
+    super()
+  }
 
   // Get current states here
 
   // Grow the tree
   grow () {
     this._age += 1
-    if (this._height <= 6){
-      this._height += Math.ceil(Math.random()*3)*0.6
+    if (this._height <= 6.5){
+      this._height += Math.ceil(Math.random()*3)*0.5
     } else {
       this._height = this._height
     }
@@ -74,63 +93,31 @@ class MangoTree {
 
 }
 
-class Mango {
+class Mango extends Fruit {
   // Produce a mango
   constructor () {
-    this.quality = this.quality()
+    super()
   }
-  
-  quality(){
-    if (Math.random() > 0.4){
-      return 'good'
-    } else {
-      return 'bad'
-    }
-  }
-
 }
 
 
 //   driver code untuk release 0
-  //  let mangoTree = new MangoTree()
-  //  console.log('the tree is alive')
-  //  do {
-  //    mangoTree.grow();
-  //    mangoTree.produceMangoes();
-  //    mangoTree.harvest();
-  //    console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
-  //  } while (mangoTree.healthStatus != false)
-  //  console.log('the tree has dead')
+   let mangoTree = new MangoTree()
+   console.log('the mango tree is alive')
+   do {
+     mangoTree.grow();
+     mangoTree.produceMangoes();
+     mangoTree.harvest();
+     console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
+   } while (mangoTree.healthStatus != false)
+   console.log('the mango tree has dead')
   
 
 // Release 1
-class AppleTree {
-  constructor (age=0, height=0, fruits=0, healthStatus=true, harvested=null) {
-    this._age = age
-    this._height = height
-    this._fruits = fruits
-    this._healthStatus = healthStatus
-    this._harvested = harvested
-  }
-
-  get age () {
-    return this._age
-  }
-
-  get height () {
-    return this._height
-  }
-
-  get fruits () {
-    return this._fruits
-  }
-
-  get healthStatus () {
-    return this._healthStatus
-  }
-
-  get harvested () {
-    return this._harvested
+class AppleTree extends FruitTree {
+  constructor () {
+    super()
+    
   }
 
   // Get current states here
@@ -172,34 +159,24 @@ class AppleTree {
     return this._harvested = `${this._fruits} (${good} good, ${bad} bad)`
   }
 }
-class Apple {
+class Apple extends Fruit {
   // Produce a mango
   constructor () {
-    this.quality = this.quality()
+    super()
   }
-  
-  quality(){
-    if (Math.random() > 0.4){
-      return 'good'
-    } else {
-      return 'bad'
-    }
-  }
-
 }
 
 // Start appleTree
 let appleTree = new AppleTree()
-console.log('the tree is alive')
+console.log('the apple tree is alive')
 do {
   appleTree.grow();
   appleTree.produceApples();
   appleTree.harvest();
   console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
 } while (appleTree.healthStatus != false)
-console.log('the tree has dead')
+console.log('the apple tree has dead')
 
 
-// Release 2
-class FruitTree {}
-class Fruit {}
+// Release 3
+
