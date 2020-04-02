@@ -41,9 +41,9 @@ class MangoTree {
     if (this._age == 1){
       this._height = 0.5
     }else if(this._age>1 && this._age <=10){
-      this._height += Math.random()*2
+      this._height += Math.random()*0.6
     }else if(this._age<=20){
-      this._height += Math.random()*0.5
+      this._height += Math.random()*0.3
     }
     //Pohon Mati Umur 21Tahun
     if(this.age>20){
@@ -237,8 +237,88 @@ do {
 } while (appleTree.healthStatus != false)
 
 
+//=======================================================================================//
+//=======================================================================================//
 
 // // Release 2
 // class FruitTree {}
 // class Fruit {}
 
+class FruitsTree{
+  constructor () {
+      this._age = 0 
+      this._height = 0
+      this._fruits = 0 
+      this._healthStatus = true
+      this._harvested = []
+  }
+  
+  get age () {
+      return this._age
+  }
+  
+  get height () {
+      return this._height
+  }
+  
+  get fruits () {
+      return this._fruits
+  }  
+  
+  get healthStatus () {
+      return this._healthStatus
+  }  
+  
+  get harvested () {
+      return this._harvested
+  }
+
+  grow (umurMati,plusTinggi1,plusTinggi2,umurTinggi,tggiAwal) {
+      this._age ++
+      if (this._age == 1){
+        this._height = tggiAwal
+      }else if(this._age>1 && this._age <=10){
+        this._height += Math.random()*plusTinggi1
+      }else if(this._age<=umurTinggi){
+        this._height += Math.random()*plusTinggi2
+      }
+      //Umur Pohon Mati  
+      if(this.age>umurMati){
+        this._healthStatus = false
+        console.log('The tree has met its end. :sad:')
+      }
+  
+      this._height = Math.floor(this._height*10)/10 ;
+      
+      return this
+  }
+    
+  // Produce some Fruits
+  produceFruits(tahun1,tahun2,produksi1,produksi2) {
+      if(this._age>=tahun1 && this._age<=tahun2){
+          this._fruits = Math.random()*produksi1
+      }else if(this.age>tahun2){
+          this._fruits = Math.random()*produksi2
+      }
+  }
+
+}
+
+class Fruit {
+  // Produce a Fruits
+  constructor () {
+    this.quality =''
+  }
+
+  cek(){
+    let angka = Math.random();
+    if(angka<0.2){
+      this.quality = 'bad'
+    }else{
+      this.quality = 'good'
+    }
+  }
+}
+
+//=======================================================================================//
+//=======================================================================================//
