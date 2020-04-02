@@ -47,27 +47,6 @@ class MangoTree extends FruitTree {
   constructor (age, height, fruits, healthStatus, harvested, mature) {
     super(age, height, fruits, healthStatus, harvested, mature)
   }
-
-  get age() {
-    return this._age;
-  }
-
-  get height() {
-    return this._height;
-  }
-
-  get fruits() {
-    return this._fruits;
-  }
-
-  get healthStatus() {
-    return this._healthStatus;
-  }
-
-  get harvested() {
-    return this._harvested;
-  }
-
   // Get current states here
 
   // Grow the tree
@@ -135,34 +114,11 @@ class MangoTree extends FruitTree {
     console.log("The tree has met its end. :sad:");
 
 // Release 1
-console.log("================================================================================");
-console.log("===============================APPLE TREE=======================================");
 class AppleTree extends FruitTree {
   // Initialize a new AppleTree
   constructor (age, height, fruits, healthStatus, harvested, mature) {
     super(age, height, fruits, healthStatus, harvested, mature)
   }
-
-  get age() {
-    return this._age;
-  }
-
-  get height() {
-    return this._height;
-  }
-
-  get fruits() {
-    return this._fruits;
-  }
-
-  get healthStatus() {
-    return this._healthStatus;
-  }
-
-  get harvested() {
-    return this._harvested;
-  }
-
   // Get current states here
 
   // Grow the tree
@@ -214,6 +170,9 @@ class Apple extends FruitTree{
       super(random);
   }
 }
+console.log("================================================================================");
+console.log("===============================APPLE TREE=======================================");
+
 
     console.log("The tree is alive! :smile:");
     let appleTree = new AppleTree(0, 0, 0, 200, 0, 10)
@@ -242,26 +201,6 @@ class PearTree extends FruitTree {
   // Initialize a new MangoTree
   constructor (age, height, fruits, healthStatus, harvested, mature) {
     super(age, height, fruits, healthStatus, harvested, mature)
-  }
-
-  get age() {
-    return this._age;
-  }
-
-  get height() {
-    return this._height;
-  }
-
-  get fruits() {
-    return this._fruits;
-  }
-
-  get healthStatus() {
-    return this._healthStatus;
-  }
-
-  get harvested() {
-    return this._harvested;
   }
 
   // Get current states here
