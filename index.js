@@ -1,10 +1,7 @@
 "use strict"
 
 // Release 0
-
-
 // Release 1
-
 // Release 2
 class FruitTree {
   constructor(name, age, height, matureAge, healthStatus, mature, averageFruits, growth, die) {
@@ -101,14 +98,12 @@ class MangoTree extends FruitTree {
     super()
   }
 }
-
 class Mango extends Fruit {
   // Produce a mango
   constructor() {
     super()
   }
 }
-
 // driver code untuk release 0
 let mangoTree = new MangoTree()
 do {
