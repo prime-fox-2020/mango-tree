@@ -156,3 +156,46 @@ do {
   appleTree.harvest();
   console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
 } while (appleTree.healthStatus != false)
+
+// Release 3
+class PearTree extends FruitTree {
+  constructor() {
+   super()
+  }
+
+  // Get current states here
+  // Grow the tree
+  grow() {
+    this.matureAge = 3
+    this.stopHeight = 17
+    this.deadAge = 20
+    super.grow()
+  }
+
+  // Produce some apples
+  producePear() {
+    if (this._age > this.matureAge) {
+      let totalPear = Math.round(Math.random() * 10) + 2
+      this._fruits = []
+      for (let i = 0; i < totalPear; i++) {
+        this._fruits.push(new Pear())
+      }
+    }
+  }
+
+}
+
+class Pear extends Fruit {
+  constructor() {
+    super()
+  }
+}
+
+let pearTree = new PearTree()
+console.log(`\n ===== Pear Tree =====`);
+do {
+  pearTree.grow();
+  pearTree.producePear();
+  pearTree.harvest();
+  console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} | Fruits harvested = ${pearTree.harvested}`)
+} while (pearTree.healthStatus != false)
