@@ -43,15 +43,32 @@ class MangoTree {
 
   // Grow the tree
   grow () {
+    this._harvested.good = 0
+    this._harvested.bad = 0
+    this._age++
+
+    if (this._age < this.limitGrowth) {
+      this._height += Math.random() * 3 + 1
+    }
+    if (this._age === this.deadAge) {
+      this._healthStatus = false
+    }
   }
 
   // Produce some mangoes
   produceMangoes () {
+    for (let i = 0; i < Math.round(Math.random() * 100 + 1); i++) {
+      this._fruits.push(new Mango())
+    }
   }
 
   // Get some fruits
   harvest () {
+    this._fruits.forEach(fruit => {
+      fruit.quality ? this._harvested.good++ : this._harvested.bad++
+    })
 
+    this._fruits.length = 0
   }
 
 }
@@ -80,7 +97,7 @@ class Mango {
    mangoTree.grow();
    mangoTree.produceMangoes();
    mangoTree.harvest();
-   console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
+   console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height.toFixed(1)} | Fruits harvested = ${mangoTree.harvested}`)
  } while (mangoTree.healthStatus != false)
  console.log(`The tree has met its end. :sad:`)
 
