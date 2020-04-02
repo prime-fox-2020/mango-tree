@@ -166,6 +166,41 @@ class Apple extends Fruit {
   }
 }
 
+class PearTree extends FruitTree {
+  // PearTree has the ability to produce the fruit double but the chance of good fruit is lower
+  constructor(fruitMultiply = 2) {
+    super();
+    this._fruitMultiply = fruitMultiply;
+  }
+  get fruitMultiply() {return this._fruitMultiply;}
+
+  produceFruits() {
+    if (this.age >= this.matureAge && this.age <= this.pauseAge) {
+      let countFruits = (this.age-this.matureAge) + Math.ceil(Math.random() * (2+this.age-this.matureAge));
+      countFruits *= this.fruitMultiply;
+      for (let i = 0; i < countFruits; i++) {
+        const fruit = new Pear;
+        this.fruits.push(fruit);
+      }
+    }
+  }
+}
+
+class Pear extends Fruit {
+  //Each type of fruit tree have different succes chance producing good fruit
+  constructor() {
+    super();
+  }
+  makeFruit(){
+    const coin = Math.random();
+    if (coin > 0.45){
+      return "Good";
+    } else {
+      return "Bad";
+    }
+  }
+}
+
 /**
  * driver code untuk release 0
  * let mangoTree = new MangoTree()
@@ -187,7 +222,7 @@ class Apple extends Fruit {
 // } while (treeOfLife.healthStatus != false);
 // console.log("The fruit tree has met it's end. :sad:");
 
-let tree0 = new MangoTree();
+let tree0 = new MangoTree(10); // growRate
 console.log(`The ${tree0.constructor.name} is alive! :smile:`);
 do {
   debugger;
@@ -200,7 +235,7 @@ console.log(`The ${tree0.constructor.name} has met it's end. :sad:`);
 
 console.log("\n===============================================================\n");
 
-let tree1 = new AppleTree();
+let tree1 = new AppleTree(4); // longevity
 console.log(`The ${tree1.constructor.name} is alive! :smile:`);
 do {
   tree1.grow();  
@@ -209,3 +244,15 @@ do {
   console.log(`[Year ${tree1.age} Report] Height = ${tree1.height} | Fruits harvested = ${tree1.harvested}`)
 } while (tree1.healthStatus != false);
 console.log(`The ${tree1.constructor.name} has met it's end. :sad:`);
+
+console.log("\n===============================================================\n");
+
+let tree2 = new PearTree(5); // fruitMultiply
+console.log(`The ${tree2.constructor.name} is alive! :smile:`);
+do {
+  tree2.grow();  
+  tree2.produceFruits();
+  tree2.harvest();
+  console.log(`[Year ${tree2.age} Report] Height = ${tree2.height} | Fruits harvested = ${tree2.harvested}`)
+} while (tree2.healthStatus != false);
+console.log(`The ${tree2.constructor.name} has met it's end. :sad:`);
