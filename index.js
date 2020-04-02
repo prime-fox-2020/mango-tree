@@ -30,6 +30,7 @@ class FruitTree {
     return this._harvested
   }
 }
+
 class Fruit {
   constructor () {
     this.quality = this.quality()
@@ -102,15 +103,15 @@ class Mango extends Fruit {
 
 
 //   driver code untuk release 0
-   let mangoTree = new MangoTree()
-   console.log('the mango tree is alive')
-   do {
-     mangoTree.grow();
-     mangoTree.produceMangoes();
-     mangoTree.harvest();
-     console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
-   } while (mangoTree.healthStatus != false)
-   console.log('the mango tree has dead')
+  //  let mangoTree = new MangoTree()
+  //  console.log('the mango tree is alive')
+  //  do {
+  //    mangoTree.grow();
+  //    mangoTree.produceMangoes();
+  //    mangoTree.harvest();
+  //    console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
+  //  } while (mangoTree.healthStatus != false)
+  //  console.log('the mango tree has dead')
   
 
 // Release 1
@@ -167,16 +168,73 @@ class Apple extends Fruit {
 }
 
 // Start appleTree
-let appleTree = new AppleTree()
-console.log('the apple tree is alive')
-do {
-  appleTree.grow();
-  appleTree.produceApples();
-  appleTree.harvest();
-  console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
-} while (appleTree.healthStatus != false)
-console.log('the apple tree has dead')
+// let appleTree = new AppleTree()
+// console.log('the apple tree is alive')
+// do {
+//   appleTree.grow();
+//   appleTree.produceApples();
+//   appleTree.harvest();
+//   console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
+// } while (appleTree.healthStatus != false)
+// console.log('the apple tree has dead')
 
 
 // Release 3
 
+class PeachTree extends FruitTree{
+  constructor(){
+    super()
+  }
+
+  grow () {
+    this._age += 1
+    if (this._height <= 7){
+      this._height += Math.ceil(Math.random()*3)*0.625
+    } else {
+      this._height = this._height
+    }
+    if (this._age === 23){
+      this._healthStatus = false
+    }
+    return this
+  }
+
+  // Produce some apples
+  producePeach () {
+    if(this._age >= 9){
+      this._fruits = Math.ceil(Math.random()*10)
+    }
+    return this
+  }
+
+  // Get some fruits
+  harvest () {
+    let good = 0
+    let bad = 0
+    for (let i = 0; i<this._fruits; i++){
+      let fruit = new Peach
+      if (fruit.quality === 'good'){
+        good++
+      } else if (fruit.quality === 'bad'){
+        bad++
+      }
+    }
+    return this._harvested = `${this._fruits} (${good} good, ${bad} bad)`
+  }
+}
+
+class Peach extends Fruit {
+  constructor(){
+    super()
+  }
+}
+
+let peachTree = new PeachTree()
+console.log('the peach tree is alive')
+do{
+  peachTree.grow()
+  peachTree.producePeach()
+  peachTree.harvest()
+  console.log(`[Year ${peachTree.age} Report] Height = ${peachTree.height} | Fruits harvested = ${peachTree.harvested}`)
+}while (peachTree.healthStatus != false)
+console.log('the peach tree is dead')
