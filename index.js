@@ -238,13 +238,14 @@ class FruitTree {
     this._age = 0; //umur pohon
     this._height = 0; //tinggi pohon
     this._fruits = []; //jumlah buah
-    this._healthStatus = 12; //umur maksimal pohon
+    this._healthStatus = true; //umur maksimal pohon
     this._harvested = false; //keterangan berapa buah yang dipanen
-    this._maxHeight = 200; //tinggi maksimal
+    this._maxHeight = 7; //maksimal pertumbuhan pada umur
     this._maxFruit = 50; //jumlah maksimal buah
     this.matureAge = 3; //usia pohon berbuah
     this.fruit = Fruit; //pilih objek buah
-    this.increase = 80; //maksimal pertumbuhan pertahun
+    this.increase = 1; //maksimal pertumbuhan pertahun (meter)
+    this.dead = 20;
   }
 
   get age () {
@@ -292,13 +293,12 @@ class FruitTree {
   // Grow the tree
   grow () {
     this.age++;
-    let plus = Math.random()*this.increase;
-    this.height += parseInt(plus);
-    if (this.height >= this._maxHeight) {
-      this.height = this._maxHeight;
+    if (this.age <= this._maxHeight) {
+      let plus = (Math.random()*10*this.increase)/10;
+      this.height += Number(plus.toFixed(1));
     }
     
-    this.healthStatus--;
+    if (this.age == this.dead) this.healthStatus = false;
   }
 
   // Produce some fruits
@@ -401,12 +401,13 @@ do {
 class PearTree extends FruitTree{
   constructor() {
     super();
-    this._healthStatus = 17;
-    this._maxHeight = 220;
+    this._age = 1;
+    this._maxHeight = 8;
     this._maxFruit = 30;
     this.fruit = Pear;
-    this.increase = 30;
+    this.increase = 3;
     this.matureAge = 4;
+    this.dead = 15;
   }
 }
 
@@ -421,6 +422,6 @@ do {
   pearTree.grow();
   pearTree.produceFruits();
   pearTree.harvest();
-  console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} cm | Fruits harvested = ${pearTree.harvested}`)
+  console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} m | Fruits harvested = ${pearTree.harvested}`)
 } while (pearTree.healthStatus != false)
 // console.log(pearTree)
