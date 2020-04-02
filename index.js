@@ -184,3 +184,68 @@ do {
 
 console.log(`The tree has met its end. :sad:`)
 console.log(`\n=============================================================\n`)
+
+ // Release 3
+
+ const matureAgePear = 2
+ const maxGrowthPear = 25
+
+ class PearTree extends FruitTree {
+  
+  // Initialize a new PearTree
+  constructor (age, height, fruits, healthStatus, harvested) {
+    super (age, height, fruits, healthStatus, harvested)
+  }
+
+  // Grow the tree
+  
+  grow () {
+    this.age += 1
+    this.height += Math.round(Math.random()*10)/10
+    if (this.age >= maxGrowthPear){
+      this.healthStatus = false
+    }
+  }
+
+  // Produce some pears
+  produceMangoes () {
+    if (this.age >= matureAgePear){
+      this.fruits = Math.round(Math.random()*10)
+    }
+  }
+  
+  // Get some fruits
+  harvest () {
+    let good = 0;
+    let bad = 0;
+    for (let i = 0; i < this.fruits; i++) {
+      const random = Math.round(Math.random());
+      if(random === 1){
+        good++;
+      }else {
+        bad++;
+      }
+    }
+    this.harvested = `${this.fruits} (${good} good, ${bad} bad)`
+  }
+}
+
+class Pear {
+  constructor(){
+
+  }
+}
+
+//  driver code untuk release 1
+console.log(`The pear tree is alive! :smile:`)
+
+let pearTree = new PearTree()
+do {
+  pearTree.grow();
+  pearTree.produceMangoes();
+  pearTree.harvest();
+  console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} | Fruits harvested = ${pearTree.harvested}`)
+} while (pearTree.healthStatus != false)  
+
+console.log(`The tree has met its end. :sad:`)
+console.log(`\n=============================================================\n`)
