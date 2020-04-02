@@ -11,8 +11,6 @@ class MangoTree {
     this._pauseAge = this.matureAge + 5 + Math.round(Math.random() * 15);
     this._witherAge = this.pauseAge + 5 + Math.round(Math.random() * 5);
     this._fruits = [];
-    this._goodFruits = 0;
-    this._badFruits = 0;
     // this._report = '';
   }
 
@@ -26,10 +24,6 @@ class MangoTree {
 
   get fruits() {return this._fruits;}
   set fruits(param) {this._fruits = param;}
-  get goodFruits() {return this._goodFruits;}
-  set goodFruits(param) {this._goodFruits = param;}
-  get badFruits() {return this._badFruits;}
-  set badFruits(param) {this._badFruits = param;}
   
   get healthStatus() {;}
   get harvested() {;}
@@ -65,17 +59,16 @@ class MangoTree {
   
   // Get some fruits
   harvest(fruits) {
+    let goodFruits = 0;
+    let badFruits = 0;
     for (let fruit of fruits) {
       if (fruit.quality == "Good") {
-        this.goodFruits++;
+        goodFruits++;
       } else if (fruit.quality == "Bad") {
-        this.badFruits++;
+        badFruits++;
       }
     }
-    console.log(fruits);
-    console.log(`[Year ${this.age} Report] Height = ${this.height.toFixed(1)} | Fruit harvested = ${this.fruits.length} (${this.goodFruits} good, ${this.badFruits} bad)`);
-    this.goodFruits = 0;
-    this.badFruits = 0;
+    console.log(`[Year ${this.age} Report] Height = ${this.height.toFixed(1)} | Fruit harvested = ${this.fruits.length} (${goodFruits} good, ${badFruits} bad)`);
     this.fruits = [];
   }
 }
