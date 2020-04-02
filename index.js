@@ -322,3 +322,66 @@ class Fruit {
 
 //=======================================================================================//
 //=======================================================================================//
+
+console.log(`\n ================================================================= `)
+console.log(` ================================================================= \n`)
+
+
+//=======================================================================================//
+//=======================================================================================//
+
+class PearTree extends FruitsTree{
+    constructor(){
+        super()
+    }
+  
+    grow () {
+        super.grow(15,0.4,0.2,20,0.7)
+        return this
+    }
+  
+    // Produce some mangoes
+    // Pear Berbuah biasanya Umur 2 tahun
+    produceFruits () {
+        super.produceFruits(2,5,30,50)
+    }
+  
+    harvest () {
+        let good =0;
+        let bad = 0
+        for (let i = 0; i < this.fruits; i++) {
+          let tesManggo = new Pear();
+          tesManggo.cek()
+          if(tesManggo.quality == 'good'){
+            good ++
+          }else{
+            bad ++
+          }
+        }
+        this._harvested=`${good+bad} (${good} good, ${bad} bad)`
+    }
+  
+  }
+  
+  class Pear extends Fruit {
+    // Produce a pear
+    constructor () {
+      super()
+    }
+    cek(){
+      super.cek()
+    }
+  }
+  
+  // driver code untuk release 0
+  let pearTree = new PearTree()
+  pearTree.harvest()
+  console.log('The Pear tree is alive! :smile:')
+  do {
+    if(pearTree.age>0){
+    console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} m | Fruits harvested = ${pearTree.harvested}`);
+    }
+    pearTree.grow();
+    pearTree.produceFruits();
+    pearTree.harvest();
+  } while (pearTree.healthStatus != false)
