@@ -396,3 +396,31 @@ do {
   console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} cm | Fruits harvested = ${appleTree.harvested}`)
 } while (appleTree.healthStatus != false)
 */
+
+//release 3
+class PearTree extends FruitTree{
+  constructor() {
+    super();
+    this._healthStatus = 17;
+    this._maxHeight = 220;
+    this._maxFruit = 30;
+    this.fruit = Pear;
+    this.increase = 30;
+    this.matureAge = 4;
+  }
+}
+
+class Pear extends Fruit {
+  constructor() {
+    super();
+  }
+}
+
+let pearTree = new PearTree();
+do {
+  pearTree.grow();
+  pearTree.produceFruits();
+  pearTree.harvest();
+  console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} cm | Fruits harvested = ${pearTree.harvested}`)
+} while (pearTree.healthStatus != false)
+// console.log(pearTree)
