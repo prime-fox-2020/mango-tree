@@ -1,12 +1,9 @@
 "use strict"
 
-// Release 0
-
-class MangoTree {
-
-  // Initialize a new MangoTree
-  constructor (age = 0, height = 0, fruits = 0, healthStatus = true, harvested = null) {
-  this._age = age
+// release 2
+class FruitTree{
+  constructor(age, height, fruits, healthStatus, harvested){
+    this._age = age
     this._height = height
     this._fruits = fruits
     this._healthStatus = healthStatus
@@ -31,6 +28,15 @@ class MangoTree {
 
   get harvested () {
     return this._harvested
+  }
+}
+// Release 0
+
+class MangoTree extends FruitTree {
+
+  // Initialize a new MangoTree
+  constructor (age = 0, height = 0, fruits = 0, healthStatus = true, harvested = null ) {
+    super(age, height, fruits, healthStatus, harvested)
   }
 
   // Get current states here
@@ -75,7 +81,7 @@ class MangoTree {
   }
 }
 
-class Mango { }
+class Mango {}
 
 
    let mangoTree = new MangoTree()
@@ -91,33 +97,9 @@ class Mango { }
 
 
 // Release 1
-class AppleTree {
+class AppleTree extends FruitTree {
   constructor (age = 0, height = 0, fruits = 0, healthStatus = true, harvested = null) {
-    this._age = age
-      this._height = height
-      this._fruits = fruits
-      this._healthStatus = healthStatus
-      this._harvested = harvested
-    }
-  
-    get age () {
-      return this._age
-    }
-  
-    get height () {
-      return this._height
-    }
-  
-    get fruits () {
-      return this._fruits
-    }
-  
-    get healthStatus () {
-      return this._healthStatus
-    }
-  
-    get harvested () {
-      return this._harvested
+    super(age, height, fruits, healthStatus, harvested)
     }
   
     // Get current states here
@@ -175,6 +157,3 @@ console.log('==================')
    } while (appleTree.healthStatus != false)
    console.log('\n')
 
-// Release 2
-class FruitTree {}
-class Fruit {}
