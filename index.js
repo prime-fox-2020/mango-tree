@@ -111,6 +111,7 @@
 // console.log("The tree has met it's end. :sad:")
 
 // Release 1
+/* Creating new class using concept oop polymorphism */
 // class AppleTree extends MangoTree{
 //   constructor (age, height, fruits, healthStatus, harvested, matureAge, maxHeight, deadAge) {
 //     super(age, height, fruits, healthStatus, harvested, 3, 7.5, 24)
@@ -143,14 +144,14 @@
 
 // Release 2
 class FruitTree {
-  constructor (age = 0, height = 0, fruits = 0, healthStatus = true, harvested, matureAge = 0, maxHeight = 4, heightStopAge = 10, deadAge = 9, fruitName = new Fruit) {
+  constructor (age = 0, height = 0, fruits = 0, healthStatus = true, harvested, matureAge = 0, appMaxHeight = 4, heightStopAge = 10, deadAge = 9, fruitName = new Fruit) {
     this._age = age
     this._height = height
     this._fruits = []
     this._healthStatus = healthStatus
     this._harvested = harvested
     this._matureAge = matureAge
-    this._maxHeight = maxHeight
+    this._appMaxHeight = appMaxHeight
     this._heightStopAge = heightStopAge
     this._deadAge = deadAge
     this._fruitName = fruitName
@@ -177,7 +178,7 @@ class FruitTree {
   grow () {
     this._age += 1
     let changeHeight = 0
-    if(this._age < this._heightStopAge && this._height < this._maxHeight){
+    if(this._age < this._heightStopAge && this._height < this._appMaxHeight){
       changeHeight = (Math.floor(Math.random()*10)/10)
     }
     this._height += changeHeight
@@ -228,9 +229,9 @@ class Fruit {
     }
   }
 }
-
+/* Creating new class with oop concept abstraction */
 class MangoTree extends FruitTree{
-  constructor (age, height, fruits, healthStatus, harvested, matureAge, maxHeight, heightStopAge, deadAge, fruitName) {
+  constructor (age, height, fruits, healthStatus, harvested, matureAge, appMaxHeight, heightStopAge, deadAge, fruitName) {
     super(age, height, fruits, healthStatus, harvested, 0, 5.5, 12, 19, new Mango)
   }
 }
@@ -240,8 +241,8 @@ class Mango extends Fruit{
   }
 }
 class AppleTree extends FruitTree{
-  constructor (age, height, fruits, healthStatus, harvested, matureAge, maxHeight, heightStopAge, deadAge, fruitName) {
-    super(age, height, fruits, healthStatus, harvested, 3, 8, 25, 29, new Apple)
+  constructor (age, height, fruits, healthStatus, harvested, matureAge, appMaxHeight, heightStopAge, deadAge, fruitName) {
+    super(age, height, fruits, healthStatus, harvested, 3, 8, 25, 24, new Apple)
   }
 }
 class Apple extends Fruit{
@@ -250,26 +251,27 @@ class Apple extends Fruit{
   }
 }
 
-// let mangoTree = new MangoTree()
-// console.log("Mango tree planted. Yeay!")
-// do {
-//   mangoTree.grow();
-//   mangoTree.produces();
-//   mangoTree.harvest();
-//   console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
-// } while (mangoTree.healthStatus != false)
-// console.log("The tree has met it's end. :sad:\n\n")
+let mangoTree = new MangoTree()
+console.log("Mango tree planted. Yeay!")
+do {
+  mangoTree.grow();
+  mangoTree.produces();
+  mangoTree.harvest();
+  console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
+} while (mangoTree.healthStatus != false)
+console.log("The tree has met it's end. :sad:\n\n")
 
-// let appleTree = new AppleTree()
-// console.log("Apple tree planted. Yeay!")
-// do {
-//   appleTree.grow();
-//   appleTree.produces();
-//   appleTree.harvest();
-//   console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
-// } while (appleTree.healthStatus != false)
-// console.log("The tree has met it's end. :sad:\n\n")
+let appleTree = new AppleTree()
+console.log("Apple tree planted. Yeay!")
+do {
+  appleTree.grow();
+  appleTree.produces();
+  appleTree.harvest();
+  console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
+} while (appleTree.healthStatus != false)
+console.log("The tree has met it's end. :sad:\n\n")
 
+/* Creating new class with oop concept abstraction */
 
 class PearTree extends FruitTree{
   constructor (age, height, fruits, healthStatus, harvested, matureAge, maxHeight, heightStopAge, deadAge, fruitName) {
