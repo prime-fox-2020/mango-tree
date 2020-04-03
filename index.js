@@ -159,7 +159,7 @@ class AppleTree extends FruitTree {
         this.fruits.push(new Apple(75 + Math.floor(Math.random() * 20)));
       }
     }
-    this.growthStat = total;
+    this.growthStat.push(total);
   }
 }
 
@@ -170,7 +170,34 @@ class Apple extends Fruit {
   }
 }
 
-let mangoTree = new MangoTree();
+class PearTree extends FruitTree {
+  constructor(matureAge = 10, maxAge = 12, growthRate = 120, stopGrowingAge = 5, baseFruitsPerYear = 20) {
+    super(matureAge, maxAge, growthRate, stopGrowingAge, baseFruitsPerYear);
+    this.name = 'Pear Tree';
+    this.product = 'Pear';
+  }
+
+  produceFruits() {
+    let total = 0;
+    if (this.isMature) {
+      // Generate mango for this year randomly base on this height, this age and fixed bonus value
+      total = this.baseFruitsPerYear + Math.round(Math.random() * (this.height / 120) * (this.age * 4));
+      for (let i = 0; i < total; i++) {
+        this.fruits.push(new Pear(75 + Math.floor(Math.random() * 10)));
+      }
+    }
+    this.growthStat.push(total);
+  }
+}
+
+class Pear extends Fruit {
+  constructor(grade) {
+    super(grade);
+    this.name = 'Pear';
+  }
+}
+
+let mangoTree = new PearTree();
 do {
   mangoTree.grow();
   mangoTree.produceFruits();
