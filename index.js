@@ -2,17 +2,17 @@
 
 class FruitTree {
   // Initialize a new FruitTree
-  constructor(age = 0, height = 0, matureAge = 0, pauseAge = 0, witherAge = 0, fruits = [], healthStatus = true, harvested = '') {
+  constructor(age = 0, height = 0, matureAge = 0, pauseAge = 0, witherAge = 0, fruitClass = Fruit, fruits = [], healthStatus = true, harvested = '') {
     this._age = age;
     this._height = height;
     this._matureAge = matureAge + 5 + Math.round(Math.random() * 10);
     this._pauseAge = pauseAge + this.matureAge + 5 + Math.round(Math.random() * 15);
     this._witherAge = witherAge + this.pauseAge + 5 + Math.round(Math.random() * 5);
+    this._fruitClass = fruitClass;
     this._fruits = fruits;
     this._healthStatus = healthStatus;
     this._harvested = harvested;
   }
-
   get age() {return this._age;}
   set age(param) {this._age = param;}
   get height() {return this._height;}
@@ -23,6 +23,8 @@ class FruitTree {
   set pauseAge(param) {this._pauseAge = param;}
   get witherAge() {return this._witherAge;}
   set witherAge(param) {this._witherAge = param;}
+  get fruitClass() {return this._fruitClass;}
+  set fruitClass(param) {this._fruitClass = param;}
   get fruits() {return this._fruits;}
   set fruits(param) {this._fruits = param;}
   get healthStatus() {return this._healthStatus;}
@@ -40,11 +42,11 @@ class FruitTree {
   }
   
   // Produce some fruits
-  produceFruits() {
+  produceFruits(fruitType = this.fruitClass) {
     if (this.age >= this.matureAge && this.age <= this.pauseAge) {
       const countFruits = (this.age-this.matureAge) + Math.ceil(Math.random() * (2+this.age-this.matureAge));
       for (let i = 0; i < countFruits; i++) {
-        const fruit = new Fruit;
+        const fruit = new fruitType;
         this.fruits.push(fruit);
       }
     }
@@ -75,7 +77,6 @@ class Fruit {
   constructor(quality) {
     this._quality = this.makeFruit();
   }
-
   get quality() {return this._quality;}
 
   makeFruit(){
@@ -92,6 +93,7 @@ class MangoTree extends FruitTree {
   // MangoTree has the ability to grow faster
   constructor (growRate = 5) {
     super();
+    this.fruitClass = Mango;
     this._growRate = growRate;
   }
   get growRate() {return this._growRate;}
@@ -101,16 +103,6 @@ class MangoTree extends FruitTree {
     if (this.age < this.pauseAge) {
       this.height += (Math.random() * this.growRate);
       this.height = +this.height.toFixed(1);
-    }
-  }
-
-  produceFruits() {
-    if (this.age >= this.matureAge && this.age <= this.pauseAge) {
-      const countFruits = (this.age-this.matureAge) + Math.ceil(Math.random() * (2+this.age-this.matureAge));
-      for (let i = 0; i < countFruits; i++) {
-        const fruit = new Mango;
-        this.fruits.push(fruit);
-      }
     }
   }
 }
@@ -134,21 +126,12 @@ class AppleTree extends FruitTree {
   // AppleTree has the ability to produce longer
   constructor(longevity = 3) {
     super();
+    this.fruitClass = Apple;
     this._longevity = longevity;
     this.matureAge -= this.longevity;
     this.pauseAge += this.longevity;
   }
   get longevity() {return this._longevity;}
-
-  produceFruits() {
-    if (this.age >= this.matureAge && this.age <= this.pauseAge) {
-      const countFruits = (this.age-this.matureAge) + Math.ceil(Math.random() * (2+this.age-this.matureAge));
-      for (let i = 0; i < countFruits; i++) {
-        const fruit = new Apple;
-        this.fruits.push(fruit);
-      }
-    }
-  }
 }
 
 class Apple extends Fruit {
@@ -170,16 +153,18 @@ class PearTree extends FruitTree {
   // PearTree has the ability to produce the fruit double but the chance of good fruit is lower
   constructor(fruitMultiply = 2) {
     super();
+    this.fruitClass = Pear;
     this._fruitMultiply = fruitMultiply;
+    this.countFruits *= this.fruitMultiply;
   }
   get fruitMultiply() {return this._fruitMultiply;}
 
-  produceFruits() {
+  produceFruits(fruitType = this.fruitClass) {
     if (this.age >= this.matureAge && this.age <= this.pauseAge) {
       let countFruits = (this.age-this.matureAge) + Math.ceil(Math.random() * (2+this.age-this.matureAge));
       countFruits *= this.fruitMultiply;
       for (let i = 0; i < countFruits; i++) {
-        const fruit = new Pear;
+        const fruit = new fruitType;
         this.fruits.push(fruit);
       }
     }
@@ -212,15 +197,17 @@ class Pear extends Fruit {
  * } while (mangoTree.healthStatus != false)
  */
 
-// let treeOfLife = new FruitTree();
-// console.log("The fruit tree is alive! :smile:");
-// do {
-//   treeOfLife.grow();  
-//   treeOfLife.produceFruits();
-//   treeOfLife.harvest();
-//   console.log(`[Year ${treeOfLife.age} Report] Height = ${treeOfLife.height} | Fruits harvested = ${treeOfLife.harvested}`)
-// } while (treeOfLife.healthStatus != false);
-// console.log("The fruit tree has met it's end. :sad:");
+let treeOfLife = new FruitTree();
+console.log("The fruit tree is alive! :smile:");
+do {
+  treeOfLife.grow();  
+  treeOfLife.produceFruits();
+  treeOfLife.harvest();
+  console.log(`[Year ${treeOfLife.age} Report] Height = ${treeOfLife.height} | Fruits harvested = ${treeOfLife.harvested}`)
+} while (treeOfLife.healthStatus != false);
+console.log("The fruit tree has met it's end. :sad:");
+
+console.log("\n===============================================================\n");
 
 let tree0 = new MangoTree(10); // growRate
 console.log(`The ${tree0.constructor.name} is alive! :smile:`);
