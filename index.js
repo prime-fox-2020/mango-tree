@@ -4,7 +4,7 @@ const random = function() {
   return ~~(Math.random() * 5) + 1
 }
 
-// Release 123
+// Release 012
 class FruitTree {
 
   constructor () {
