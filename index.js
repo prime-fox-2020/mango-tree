@@ -7,7 +7,7 @@ class FruitTree {
     this._age = 0;
     this._height = 10;
     this._mature = mature;
-    this._fruits = 0;
+    this._fruits = [0, 0];
     this._harvested = 0;
     this._healthStatus = true;
     this._maxHarvest = maxHarvest;
@@ -75,125 +75,87 @@ class FruitTree {
   set fruits(value) {
     this._fruits = value;
   }
+
+  grow() {
+    if (this.height !== this.maxHeight && this.age < this.heightAge) {
+      let value = this.height + Math.round(Math.random() * 100);
+      value > this.maxHeight ? value = this.maxHeight : value;
+      this.height = value;
+    }
+    this.age++;
+    if (this.age == this.maxAge) this.healthStatus = false;
+  }
+
+  // Get some fruits
+  harvest() {
+    this.harvested = `${this.fruits[0] + this.fruits[1]} (${this.fruits[0]} good, ${this.fruits[1]} bad)`;
+  }
 }
 
 class Fruit { 
-  constructor(qty) {
-    this._good = Math.round(Math.random() * qty);
-    this._bad = qty - this._good;
+  constructor() {
+    this._quality = Math.random() * 5;
   }
 
-  get good() {
-    return this._good;
-  }
-
-  get bad() {
-    return this._bad;
+  get quality() {
+    return this._quality;
   }
 }
 
 // Release 0
 class MangoTree extends FruitTree {
 
-  // Initialize a new MangoTree
-  constructor(mature, maxHarvest, heightAge, maxAge, maxHeight) {
-    super(mature, maxHarvest, heightAge, maxAge, maxHeight);
-  }
-
-  // Get current states here
-
-  // Grow the tree
-  grow() {
-    if (this.height !== this.maxHeight && this.age < this.heightAge) {
-      let value = this.height + Math.round(Math.random() * 100);
-      value > this.maxHeight ? value = this.maxHeight : value;
-      this.height = value;
-    }
-    this.age++;
-    if (this.age == this.maxAge) this.healthStatus = false;
-  }
-
-  // Produce some mangoes
-  produceMangoes() {
+  produce() {
     if (this.age >= this.mature) {
-      this.fruits = Math.round(Math.random() * this.maxHarvest);
+      let total = Math.round(Math.random() * this.maxHarvest);
+      this.fruits = [0, 0];
+      for (let i = 0; i < total; i++){
+        const qual = new Mango().quality;
+        if (qual > 2) this.fruits[0]++;
+        else this.fruits[1]++;
+      }
     }
   }
-
-  // Get some fruits
-  harvest() {
-    const buah = new Mango(this.fruits);
-    this.harvested = `${this.fruits} (${buah.good} good, ${buah.bad} bad)`;
-  }
-
 }
 
-class Mango extends Fruit{
-  // Produce a mango
-  constructor(qty) {
-    super(qty)
-  }
+class Mango extends Fruit{}
 
-}
 
-/**
-  * driver code untuk release 0
-  */
 let mangoTree = new MangoTree(3, 300, 9, 15, 450);
 console.log('The tree is alive!');
 do {
   mangoTree.grow();
-  mangoTree.produceMangoes();
+  mangoTree.produce();
   mangoTree.harvest();
   console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} cm | Fruits harvested = ${mangoTree.harvested}`)
 } while (mangoTree.healthStatus != false)
 console.log('The tree has met its end!');
 
+
+
 // Release 1
 class AppleTree extends FruitTree{
-  constructor(mature, maxHarvest, heightAge, maxAge, maxHeight) {
-    super(mature, maxHarvest, heightAge, maxAge, maxHeight);
-  }
-  // Get current states here
 
-  // Grow the tree
-  grow() {
-    if (this.height !== this.maxHeight && this.age < this.heightAge) {
-      let value = this.height + Math.round(Math.random() * 100);
-      value > this.maxHeight ? value = this.maxHeight : value;
-      this.height = value;
-    }
-    this.age++;
-    if (this.age == this.maxAge) this.healthStatus = false;
-  }
-
-  // Produce some apples
-  produceMangoes() {
+  produce() {
     if (this.age >= this.mature) {
-      this.fruits = Math.round(Math.random() * this.maxHarvest);
+      let total = Math.round(Math.random() * this.maxHarvest);
+      this.fruits = [0, 0];
+      for (let i = 0; i < total; i++){
+        const qual = new Apple().quality;
+        if (qual > 2) this.fruits[0]++;
+        else this.fruits[1]++;
+      }
     }
-  }
-
-  // Get some fruits
-  harvest() {
-    const buah = new Apple(this.fruits);
-    this.harvested = `${this.fruits} (${buah.good} good, ${buah.bad} bad)`;
-  }
+  } 
 }
 
-class Apple extends Fruit{
-  // Produce a apple
-  constructor(qty) {
-    super(qty);
-  }
-
-}
+class Apple extends Fruit{}
 
 let apple = new AppleTree(2, 400, 7, 10, 350);
 console.log('The tree is alive!');
 do {
   apple.grow();
-  apple.produceMangoes();
+  apple.produce();
   apple.harvest();
   console.log(`[Year ${apple.age} Report] Height = ${apple.height} cm | Fruits harvested = ${apple.harvested}`)
 } while (apple.healthStatus != false)
@@ -201,49 +163,27 @@ console.log('The tree has met its end!');
 
 // Release 3
 class PearTree extends FruitTree{
-  constructor(mature, maxHarvest, heightAge, maxAge, maxHeight) {
-    super(mature, maxHarvest, heightAge, maxAge, maxHeight);
-  }
-  // Get current states here
-
-  // Grow the tree
-  grow() {
-    if (this.height !== this.maxHeight && this.age < this.heightAge) {
-      let value = this.height + Math.round(Math.random() * 100);
-      value > this.maxHeight ? value = this.maxHeight : value;
-      this.height = value;
-    }
-    this.age++;
-    if (this.age == this.maxAge) this.healthStatus = false;
-  }
-
-  // Produce some tree
-  produceMangoes() {
+  
+  produce() {
     if (this.age >= this.mature) {
-      this.fruits = Math.round(Math.random() * this.maxHarvest);
+      let total = Math.round(Math.random() * this.maxHarvest);
+      this.fruits = [0, 0];
+      for (let i = 0; i < total; i++){
+        const qual = new Pear().quality;
+        if (qual > 2) this.fruits[0]++;
+        else this.fruits[1]++;
+      }
     }
   }
-
-  // Get some fruits
-  harvest() {
-    const buah = new Pear(this.fruits);
-    this.harvested = `${this.fruits} (${buah.good} good, ${buah.bad} bad)`;
-  }
 }
 
-class Pear extends Fruit{
-  // Produce a apple
-  constructor(qty) {
-    super(qty);
-  }
-
-}
+class Pear extends Fruit{}
 
 let pear = new PearTree(4, 500, 8, 9, 400);
 console.log('The tree is alive!');
 do {
   pear.grow();
-  pear.produceMangoes();
+  pear.produce();
   pear.harvest();
   console.log(`[Year ${pear.age} Report] Height = ${pear.height} cm | Fruits harvested = ${pear.harvested}`)
 } while (pear.healthStatus != false)
