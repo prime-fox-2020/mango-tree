@@ -4,13 +4,12 @@
 class AppleTree {
 
   // Initialize a new AppleTree
-  constructor (age = 0, height = 0, fruits = 0, healthStatus = true, harvested = 0, limitAge = 0, limitHeight = 5) {
+  constructor (age = 0, height = 0, fruits = 0, healthStatus = true, harvested = 0, limitHeight = 5) {
     this._age = age
     this._height = height
     this._fruits = []
     this._healthStatus = healthStatus
     this._harvested = harvested
-    this.limitAge = limitAge
     this.limitHeight = limitHeight
   }
 
@@ -54,7 +53,7 @@ class AppleTree {
 
   // Produce some Applees
   produceApple () {
-    if(this._age > this.limitAge){
+    if(this._age > 0){
       let countFruits = Math.floor(Math.random() * 7) + 1
 
       for(let i=0; i<countFruits; i++){

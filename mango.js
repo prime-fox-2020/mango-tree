@@ -4,13 +4,12 @@
 class MangoTree {
 
   // Initialize a new MangoTree
-  constructor (age = 0, height = 0, fruits = 0, healthStatus = true, harvested = 0, limitAge = 0, limitHeight = 5) {
+  constructor (age = 0, height = 0, fruits = 0, healthStatus = true, harvested = 0, limitHeight = 5) {
     this._age = age
     this._height = height
     this._fruits = []
     this._healthStatus = healthStatus
     this._harvested = harvested
-    this.limitAge = limitAge
     this.limitHeight = limitHeight
   }
 
@@ -43,8 +42,8 @@ class MangoTree {
 
     let heighGrow = 0
 
-    if(this._age < 10 && this.height < 4.4){
-      heighGrow = (Math.floor(Math.random() * 10) / 10)
+    if(this._age < 19 && this.height < this.limitHeight){
+      heighGrow = (Math.floor(Math.random() * 5) / 10)
     }
 
     this._height += heighGrow
@@ -57,8 +56,8 @@ class MangoTree {
 
   // Produce some mangoes
   produceMangoes () {
-    if(this._age > this.limitAge){
-      let countFruits = Math.floor(Math.random() * 9) + 1
+    if(this._age > 0){
+      let countFruits = Math.floor(Math.random() * 2) + 1
 
       for(let i=0; i<countFruits; i++){
         let fruit = new Mango

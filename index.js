@@ -1,12 +1,11 @@
 class FruitTree{
-  constructor (name ,age = 0, height = 0, fruits = 0, healthStatus = true, harvested = 0, limitAge = 0, limitHeight = 5) {
+  constructor (name ,age = 0, height = 0, fruits = 0, healthStatus = true, harvested = 0,  limitHeight = 5) {
     this._name = name
     this._age = age
     this._height = height
     this._fruits = []
     this._healthStatus = healthStatus
     this._harvested = harvested
-    this.limitAge = limitAge
     this.limitHeight = limitHeight
   }
 
@@ -53,7 +52,7 @@ class FruitTree{
 
   // Produce some Applees
   produceFruit () {
-    if(this._age > this.limitAge){
+    if(this._age > 0){
       let countFruits = Math.floor(Math.random() * 7) + 1
 
       for(let i=0; i<countFruits; i++){
@@ -103,8 +102,8 @@ class Fruit {
 
 
 class MangoTree extends FruitTree{
-  constructor (name, age, height, fruits, healthStatus, harvested , limitAge, limitHeight) {
-    super(new Mango, age, height, fruits, healthStatus, harvested , limitAge, limitHeight)
+  constructor (name, age, height, fruits, healthStatus, harvested , limitHeight) {
+    super(new Mango, age, height, fruits, healthStatus, harvested , limitHeight)
   }
 }
 
@@ -115,8 +114,8 @@ class Mango extends Fruit{
 }
 
 class AppleTree extends FruitTree{
-  constructor (name, age, height, fruits, healthStatus, harvested , limitAge, limitHeight) {
-    super(new Apple, age, height, fruits, healthStatus, harvested , limitAge, limitHeight)
+  constructor (name, age, height, fruits, healthStatus, harvested ,  limitHeight) {
+    super(new Apple, age, height, fruits, healthStatus, harvested ,  limitHeight)
   }
 }
 
@@ -127,8 +126,8 @@ class Apple extends Fruit{
 }
 
 class PearTree extends FruitTree{
-  constructor (name, age, height, fruits, healthStatus, harvested , limitAge, limitHeight) {
-    super(new Pear, age, height, fruits, healthStatus, harvested , limitAge, limitHeight)
+  constructor (name, age, height, fruits, healthStatus, harvested ,  limitHeight) {
+    super(new Pear, age, height, fruits, healthStatus, harvested ,  limitHeight)
   }
 }
 
