@@ -1,11 +1,11 @@
 "use strict"
 
 class FruitTree{
-  constructor (name ,age = 0, height = 0, fruits = 0, healthStatus = true, harvested = 0, limitAge = 19, limitHeight = 5) {
+  constructor (name ,age = 0, height = 0, fruits = [], healthStatus = true, harvested = 0, limitAge = 19, limitHeight = 5) {
     this._name = name
     this._age = age
     this._height = height
-    this._fruits = []
+    this._fruits = fruits
     this._healthStatus = healthStatus
     this._harvested = harvested
     this.limitAge = limitAge
@@ -16,51 +16,75 @@ class FruitTree{
     return this._age
   }
 
+  set age(param){
+    this._age = param
+    return this
+  }
+
   get height () {
     return this._height
   }
 
+  set height(param){
+    this._height = param
+    return this
+  }
+
   get fruits () {
-    return this.fruit
+    return this._fruits
+  }
+
+  set fruits(param){
+    this._fruits = param
+    return this
   }
 
   get healthStatus () {
     return this._healthStatus
   }
 
+  set healthStatus(param){
+    this._healthStatus = param
+  }
+
   get harvested () {
     return this._harvested
+  }
+
+  set harvested(param){
+    this._harvested = param
+    return this
   }
 
 
   // Grow the tree
   grow () {
     
-    this._age++
+    this.age++
 
     let heighGrow = 0
 
-    if(this._age < 19 && this.height < this.limitHeight){
+    if(this.age < 19 && this.height < this.limitHeight){
       heighGrow = (Math.floor(Math.random() * 5) / 10)
     }
 
-    this._height += heighGrow
-    this._height = Number(this._height.toFixed(2))
+    this.height += heighGrow
+    this.height = Number(this.height.toFixed(2))
 
-    if(this._age > this.limitAge){
-      this._healthStatus = false
+    if(this.age > this.limitAge){
+      this.healthStatus = false
     }
   }
 
   // Produce some Applees
   produceFruit () {
-    if(this._age > 0){
+    if(this.age > 0){
       let countFruits = Math.floor(Math.random() * 7) + 1
 
       for(let i = 0; i < countFruits; i++){
-        let fruit = new Fruit
+        let fruit = new Fruit()
         fruit.qualityFruits()
-        this._fruits.push(fruit.quality)
+        this.fruits.push(fruit.quality)
       }
     }
   }
@@ -70,15 +94,15 @@ class FruitTree{
     let goodFruits = 0
     let badFruits = 0
 
-    for(let i = 0; i < this._fruits.length; i++){
-      if(this._fruits[i] === 'Good'){
+    for(let i = 0; i < this.fruits.length; i++){
+      if(this.fruits[i] === 'Good'){
         goodFruits++
       } else {
         badFruits++
       }
     }
 
-    this._harvested =  `${this._fruits.length} (${goodFruits} Good, ${badFruits} Bad)`
+    this.harvested =  `${this.fruits.length} (${goodFruits} Good, ${badFruits} Bad)`
   }
 
 }
@@ -103,9 +127,19 @@ class Fruit {
 
 class MangoTree extends FruitTree{
   constructor (name, age, height, fruits, healthStatus, harvested , limitAge, limitHeight) {
-    super(new Mango, age, height, fruits, healthStatus, harvested , limitAge, limitHeight)
+    super(name, age, height, fruits, healthStatus, harvested , limitAge, limitHeight)
   }
-  
+  produceMangoes() {
+    if(this.age > 0){
+      let countFruits = Math.floor(Math.random() * 7) + 1
+
+      for(let i = 0; i < countFruits; i++){
+        let fruit = new Mango()
+        fruit.qualityFruits()
+        this.fruits.push(fruit.quality)
+      }
+    }
+  }
 }
 class Mango extends Fruit {
   constructor(quality){
@@ -115,7 +149,18 @@ class Mango extends Fruit {
 
 class AppleTree extends FruitTree{
   constructor (name, age, height, fruits, healthStatus, harvested , limitAge, limitHeight) {
-    super(new Apple, age, height, fruits, healthStatus, harvested , limitAge, limitHeight)
+    super(name, age, height, fruits, healthStatus, harvested , limitAge, limitHeight)
+  }
+  produceApples() {
+    if(this.age > 0){
+      let countFruits = Math.floor(Math.random() * 7) + 1
+
+      for(let i = 0; i < countFruits; i++){
+        let fruit = new Apple()
+        fruit.qualityFruits()
+        this.fruits.push(fruit.quality)
+      }
+    }
   }
 }
 class Apple extends Fruit{
@@ -126,7 +171,18 @@ class Apple extends Fruit{
 
 class PearTree extends FruitTree{
   constructor (name, age, height, fruits, healthStatus, harvested , limitAge, limitHeight) {
-    super(new Pear, age, height, fruits, healthStatus, harvested , limitAge, limitHeight)
+    super(name, age, height, fruits, healthStatus, harvested , limitAge, limitHeight)
+  }
+  producePears() {
+    if(this.age > 0){
+      let countFruits = Math.floor(Math.random() * 7) + 1
+
+      for(let i = 0; i < countFruits; i++){
+        let fruit = new Pear()
+        fruit.qualityFruits()
+        this.fruits.push(fruit.quality)
+      }
+    }
   }
 }
 class Pear extends Fruit{
@@ -140,7 +196,7 @@ console.log("The tree is alive! :smile:")
 let mangoTree = new MangoTree()
 do {
   mangoTree.grow();
-  mangoTree.produceFruit();
+  mangoTree.produceMangoes();
   mangoTree.harvest();
   console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
 } while (mangoTree.healthStatus != false)
@@ -151,7 +207,7 @@ console.log("The tree is alive! :smile:")
 let appleTree = new AppleTree()
 do {
   appleTree.grow();
-  appleTree.produceFruit();
+  appleTree.produceApples();
   appleTree.harvest();
   console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} m | Fruits harvested = ${appleTree.harvested}`)
 } while (appleTree.healthStatus != false)
@@ -162,7 +218,7 @@ console.log("The tree is alive! :smile:")
 let pearTree = new PearTree()
 do {
   pearTree.grow();
-  pearTree.produceFruit();
+  pearTree.producePears();
   pearTree.harvest();
   console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} m | Fruits harvested = ${pearTree.harvested}`)
 } while (pearTree.healthStatus != false)
