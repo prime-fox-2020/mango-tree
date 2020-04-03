@@ -131,3 +131,23 @@ do {
   appleTree.harvest();
   console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
 } while (appleTree.healthStatus != false)
+
+class PearTree extends FruitTree {
+  // Initialize a new PearTree
+  constructor() {
+    super()
+  }
+}
+class Pear extends Fruit {
+  // Produce a pear
+  constructor() {
+    super()
+  }
+}
+let pearTree = new PearTree()
+do {
+  pearTree.grow();
+  pearTree.produceFruits();
+  pearTree.harvest();
+  console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} | Fruits harvested = ${pearTree.harvested}`)
+} while (pearTree.healthStatus != false)
